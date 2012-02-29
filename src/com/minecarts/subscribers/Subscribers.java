@@ -16,6 +16,8 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+        
         log("Version {0} enabled.", getDescription().getVersion());
     }
     
