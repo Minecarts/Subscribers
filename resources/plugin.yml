@@ -6,16 +6,3 @@ website: http://minecarts.com/
 main: com.minecarts.subscribers.Subscribers
 version: ${pom.version}
 depend: [ DBPermissions ]
-
-commands:
-    subscribers:
-        aliases: [ sub, subscriber ]
-        description: Subscribers internal plugin commands
-        usage: /<command> reload
-        
-permissions:
-    subscribers:
-        admin.reload:
-            description: Reload Subscribers config
-            default: op
-
