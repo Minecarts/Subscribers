@@ -70,6 +70,8 @@ public class Subscribers extends JavaPlugin implements Listener {
             ? org.bukkit.ChatColor.YELLOW + player.getName()
             : player.getName();
         
+        log("Updating player display name {0} and player list name {1} to {2}", player.getDisplayName(), player.getPlayerListName(), name);
+        
         player.setDisplayName(name);
         player.setPlayerListName(name.length() > 16
                 ? name.substring(0, 14) + ".."
