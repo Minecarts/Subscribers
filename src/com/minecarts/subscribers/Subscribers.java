@@ -1,6 +1,5 @@
 package com.minecarts.subscribers;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.text.MessageFormat;
 
@@ -20,8 +19,6 @@ import org.bukkit.event.Listener;
 
 
 public class Subscribers extends JavaPlugin implements Listener {
-    private static final Logger logger = Logger.getLogger("com.minecarts.subscribers");
-    
     
     @Override
     public void onEnable() {
@@ -35,6 +32,7 @@ public class Subscribers extends JavaPlugin implements Listener {
                 if(args[0].equalsIgnoreCase("reload")) {
                     Subscribers.this.reloadConfig();
                     sender.sendMessage("Subscribers config reloaded.");
+                    log("Config reloaded by {0}", sender.getName());
                     return true;
                 }
                 
@@ -59,7 +57,9 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     @EventHandler
     public void on(com.minecarts.dbpermissions.PermissionsCalculated event) {
+        debug("Caught event {0}", event);
         if(event.getPermissible() instanceof Player) {
+            debug("Permissible is a player: ", event.getPermissible());
             updatePlayer((Player) event.getPermissible());
         }
     }
@@ -83,7 +83,7 @@ public class Subscribers extends JavaPlugin implements Listener {
         log(Level.INFO, message);
     }
     public void log(Level level, String message) {
-        logger.log(level, MessageFormat.format("{0}> {1}", getDescription().getName(), message));
+        getLogger().log(level, message);
     }
     public void log(String message, Object... args) {
         log(MessageFormat.format(message, args));
