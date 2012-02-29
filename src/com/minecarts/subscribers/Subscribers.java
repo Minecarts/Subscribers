@@ -57,13 +57,11 @@ public class Subscribers extends JavaPlugin implements Listener {
     }
     
     
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void on(org.bukkit.event.player.PlayerLoginEvent event) {
-        updatePlayer(event.getPlayer());
-    }
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void on(org.bukkit.event.player.PlayerJoinEvent event) {
-        updatePlayer(event.getPlayer());
+    @EventHandler
+    public void on(com.minecarts.dbpermissions.PermissionsCalculated event) {
+        if(event.getPermissible() instanceof Player) {
+            updatePlayer((Player) event.getPermissible());
+        }
     }
     
     
