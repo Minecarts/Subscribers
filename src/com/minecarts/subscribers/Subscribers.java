@@ -33,6 +33,8 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     
     private void updatePlayer(Player player) {
+        if(!player.isOnline()) return;
+        
         String name = player.hasPermission("subscriber")
             ? org.bukkit.ChatColor.YELLOW + player.getName()
             : player.getName();
