@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Subscribers extends JavaPlugin implements Listener {
     
@@ -23,17 +23,16 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     
     @EventHandler
-    public void on(com.minecarts.dbpermissions.PermissionsCalculated event) {
-        debug("Caught event {0}", event);
-        if(event.getPermissible() instanceof Player) {
-            debug("Permissible is a player: ", event.getPermissible());
-            updatePlayer((Player) event.getPermissible());
-        }
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        updatePlayer(event.getPlayer());
     }
     
     
     private void updatePlayer(Player player) {
-        if(!player.isOnline()) return;
+        if(!player.isOnline()) {
+            debug("Player {0} is not online", player.getName());
+            return;
+        }
         
         String name = player.hasPermission("subscriber")
             ? org.bukkit.ChatColor.YELLOW + player.getName()
