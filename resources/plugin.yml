@@ -5,4 +5,4 @@ website: http://minecarts.com/
 
 main: com.minecarts.subscribers.Subscribers
 version: ${pom.version}
-depend: [ DBPermissions ]
+softdepend: [ DBPermissions ]

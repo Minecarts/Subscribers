@@ -18,7 +18,9 @@ public class Subscribers extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         
-        log("Version {0} enabled.", getDescription().getVersion());
+        for(Player player : getServer().getOnlinePlayers()) {
+            updatePlayer(player);
+        }
     }
     
     
@@ -30,7 +32,7 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     private void updatePlayer(Player player) {
         if(!player.isOnline()) {
-            debug("Player {0} is not online", player.getName());
+            debug("Player {0} is not online?", player.getName());
             return;
         }
         
