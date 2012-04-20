@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerExpChangeEvent;
 
 import com.minecarts.dbpermissions.PermissionsCalculated;
 
@@ -28,6 +29,15 @@ public class Subscribers extends JavaPlugin implements Listener {
     
     
     @EventHandler
+    public void onExpChange(PlayerExpChangeEvent event) {
+        if(event.getPlayer().hasPermission("subscriber") && event.getAmount() > 0) {
+            debug("Subscriber {0} exp changed by {1}, doubling", event.getPlayer(), event.getAmount());
+            event.setAmount(event.getAmount() * 2);
+        }
+    }
+    
+    
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         updatePlayer(event.getPlayer());
     }
@@ -38,7 +48,6 @@ public class Subscribers extends JavaPlugin implements Listener {
             updatePlayer((Player) event.getPermissible());
         }
     }
-    
     
     private void updatePlayer(Player player) {
         if(!player.isOnline()) {
