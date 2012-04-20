@@ -12,6 +12,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.minecarts.dbpermissions.PermissionsCalculated;
+
+
 public class Subscribers extends JavaPlugin implements Listener {
     
     @Override
@@ -27,6 +30,13 @@ public class Subscribers extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         updatePlayer(event.getPlayer());
+    }
+    
+    @EventHandler
+    public void onPermissions(PermissionsCalculated event) {
+        if(event.getPermissible() instanceof Player) {
+            updatePlayer((Player) event.getPermissible());
+        }
     }
     
     
